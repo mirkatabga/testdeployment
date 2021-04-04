@@ -7,10 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDeployment.Website", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDeployment.Database", "TestDeployment.Database\TestDeployment.Database.csproj", "{07EB45F8-E8A3-46BD-9C07-258DBB65DF70}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Containerization", "Containerization", "{513EB38C-4AB1-4286-A556-8B2A1F0931C1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{513EB38C-4AB1-4286-A556-8B2A1F0931C1}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		Dockerfile = Dockerfile
+		website.Dockerfile = website.Dockerfile
 	EndProjectSection
 EndProject
 Global
