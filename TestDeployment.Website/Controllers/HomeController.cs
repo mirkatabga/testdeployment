@@ -23,6 +23,11 @@ namespace TestDeployment.Website.Controllers
             return View();
         }
 
+        public IActionResult InvokeDatabase()
+        {
+            throw new NotImplementedException();
+        }
+
         public IActionResult Privacy()
         {
             return View();

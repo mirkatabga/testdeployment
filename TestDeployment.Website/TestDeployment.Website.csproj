@@ -5,11 +5,17 @@
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <UserSecretsId>62baaedc-1c7a-46fa-9353-ebec03d303c7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\</DockerfileContext>
+    <DockerfileFile>..\Dockerfile</DockerfileFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.13" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestDeployment.Database\TestDeployment.Database.csproj" />
+  </ItemGroup>
 </Project>
