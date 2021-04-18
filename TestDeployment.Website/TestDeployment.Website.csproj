@@ -6,7 +6,8 @@
     <UserSecretsId>62baaedc-1c7a-46fa-9353-ebec03d303c7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
-    <DockerfileFile>..\website.Dockerfile</DockerfileFile>
+    <DockerfileFile>..\Dockerfile.shop</DockerfileFile>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,5 +18,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestDeployment.Database\TestDeployment.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\.dockerignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\.dockerignore" />
   </ItemGroup>
 </Project>

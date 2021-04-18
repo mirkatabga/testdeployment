@@ -1,0 +1,38 @@
+version: '3.4'
+
+networks:
+  testdeployment.website:
+    driver: bridge 
+
+services:
+  testdeployment.website:
+    image: ${DOCKER_REGISTRY-}testdeploymentwebsite
+    depends_on:
+      - "postgres_image"
+    build:
+      context: .
+      dockerfile: TestDeployment.Website/Dockerfile
+    ports:
+      - "8000:80"
+      - "8443:443"
+    environment:
+      DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=blogdb;username=bloguser;password=bloguser"
+    networks:
+      - testdeployment.website
+  
+  postgres_image:
+    image: postgres:12.6
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+    environment:
+      POSTGRES_USER: "bloguser"
+      POSTGRES_PASSWORD: "bloguser"
+      POSTGRES_DB: "blogdb"
+    networks:
+      - testdeployment.website
+volumes:
+  db_volume:

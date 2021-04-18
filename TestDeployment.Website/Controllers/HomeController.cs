@@ -4,18 +4,25 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using TestDeployment.Database;
 using TestDeployment.Website.Models;
 
 namespace TestDeployment.Website.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        readonly ILogger<HomeController> _logger;
+        readonly TestDbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(
+            ILogger<HomeController> logger,
+            TestDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
@@ -25,7 +32,9 @@ namespace TestDeployment.Website.Controllers
 
         public IActionResult InvokeDatabase()
         {
-            throw new NotImplementedException();
+            var test = _dbContext.Tests.FirstOrDefault();
+
+            return Json(test, new JsonSerializerOptions { WriteIndented = true } );
         }
 
         public IActionResult Privacy()
