@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDeployment.Database", "
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4C4FFBFA-AD56-4FAF-BB11-70F967152087}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reverseproxy", "reverseproxy", "{50A4B622-BB04-4F92-ACF9-935D177596E1}"
+	ProjectSection(SolutionItems) = preProject
+		reverseproxy\nginx.conf = reverseproxy\nginx.conf
+		reverseproxy\Nginx.Dockerfile = reverseproxy\Nginx.Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,22 +1,40 @@
 version: '3.4'
 
 networks:
-  testdeployment.website:
+  test_deployment_network:
     driver: bridge 
 
 services:
-  testdeployment.website:
+  reverseproxy:
+    container_name: "reverseproxy"
+    build:
+      context: ./reverseproxy
+      dockerfile: Nginx.Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    networks: 
+      - "test_deployment_network"
+
+  test_deployment:
     image: ${DOCKER_REGISTRY-}testdeploymentwebsite
     depends_on:
+      - "reverseproxy"
       - "postgres_image"
     build:
       context: .
       dockerfile: TestDeployment.Website/Dockerfile
-    ports:
-      - "8000:80"
-      - "8443:443"
-    networks:
-      - testdeployment.website
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    expose:
+      - "5000"
+    restart: always
+    networks: 
+      - "test_deployment_network"
   
   postgres_image:
     image: postgres:12.6
@@ -30,7 +48,7 @@ services:
       POSTGRES_DB: "testdeployment"
       POSTGRES_USER: "testdeploymentuser"
       POSTGRES_PASSWORD: "abracadabra1!"
-    networks:
-      - testdeployment.website
+    networks: 
+      - "test_deployment_network"
 volumes:
   db_volume:
